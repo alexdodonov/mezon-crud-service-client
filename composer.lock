@@ -86,16 +86,16 @@
         },
         {
             "name": "mezon/functional",
-            "version": "1.0.1",
+            "version": "1.0.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/alexdodonov/mezon-functional.git",
-                "reference": "9f92bb4084d140e7d34d208e6fdc7e370c292d37"
+                "reference": "e1573d1e5f807a6f3a7f2aea3a544a9ed98f25cb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/alexdodonov/mezon-functional/zipball/9f92bb4084d140e7d34d208e6fdc7e370c292d37",
-                "reference": "9f92bb4084d140e7d34d208e6fdc7e370c292d37",
+                "url": "https://api.github.com/repos/alexdodonov/mezon-functional/zipball/e1573d1e5f807a6f3a7f2aea3a544a9ed98f25cb",
+                "reference": "e1573d1e5f807a6f3a7f2aea3a544a9ed98f25cb",
                 "shasum": ""
             },
             "require": {
@@ -121,20 +121,20 @@
             ],
             "description": "Small and fast framework for functional programming",
             "homepage": "https://github.com/alexdodonov/mezon-functional",
-            "time": "2020-02-13T21:26:22+00:00"
+            "time": "2020-03-27T16:21:15+00:00"
         },
         {
             "name": "mezon/service-client",
-            "version": "1.0.0",
+            "version": "1.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/alexdodonov/mezon-service-client.git",
-                "reference": "bc84cae4e6321b6d0abf9d5cb6926fc2591be911"
+                "reference": "1828f5c7c63f7b68120ee5daf30247d5f7c5220c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/alexdodonov/mezon-service-client/zipball/bc84cae4e6321b6d0abf9d5cb6926fc2591be911",
-                "reference": "bc84cae4e6321b6d0abf9d5cb6926fc2591be911",
+                "url": "https://api.github.com/repos/alexdodonov/mezon-service-client/zipball/1828f5c7c63f7b68120ee5daf30247d5f7c5220c",
+                "reference": "1828f5c7c63f7b68120ee5daf30247d5f7c5220c",
                 "shasum": ""
             },
             "require": {
@@ -162,7 +162,7 @@
             ],
             "description": "Small service client script",
             "homepage": "https://github.com/alexdodonov/mezon-service-client",
-            "time": "2020-02-24T10:51:05+00:00"
+            "time": "2020-04-13T11:25:05+00:00"
         }
     ],
     "packages-dev": [],
@@ -174,5 +174,6 @@
     "platform": {
         "php": ">=7.2.0"
     },
-    "platform-dev": []
+    "platform-dev": [],
+    "plugin-api-version": "1.1.0"
 }

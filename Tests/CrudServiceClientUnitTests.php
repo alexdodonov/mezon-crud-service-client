@@ -10,12 +10,25 @@ namespace Mezon\CrudService\Tests;
  * @version v.1.0 (2019/09/18)
  * @copyright Copyright (c) 2019, aeon.org
  */
+
 class HackedCrudServiceClient extends \Mezon\CrudService\CrudServiceClient
 {
 
     public function publicGetCompiledFilter($filter, $amp = true): string
     {
         return (parent::getCompiledFilter($filter, $amp));
+    }
+
+    /**
+     * Method returns concrete url byit's locator
+     *
+     * @param string $urlLocator
+     *            url locator
+     * @return string concrete URL
+     */
+    public function getRequestUriPublic(string $urlLocator): string
+    {
+        return $this->getRequestUrl($urlLocator);
     }
 }
 
@@ -37,8 +50,8 @@ class CrudServiceClientUnitTests extends \Mezon\Service\Tests\ServiceClientUnitT
     {
         $mock = $this->getMockBuilder(\Mezon\CrudService\CrudServiceClient::class)
             ->setMethods([
-            'getRequest',
-            'postRequest'
+            'sendGetRequest',
+            'sendPostRequest'
         ])
             ->disableOriginalConstructor()
             ->getMock();
@@ -56,8 +69,8 @@ class CrudServiceClientUnitTests extends \Mezon\Service\Tests\ServiceClientUnitT
     {
         $mock = $this->getCrudServiceClientMock();
 
-        $mock->method('getRequest')->willReturn(json_decode(file_get_contents(__DIR__ . '/Conf/' . $configName . '.json')));
-        $mock->method('postRequest')->willReturn(json_decode(file_get_contents(__DIR__ . '/Conf/' . $configName . '.json')));
+        $mock->method('sendGetRequest')->willReturn(json_decode(file_get_contents(__DIR__ . '/Conf/' . $configName . '.json')));
+        $mock->method('sendPostRequest')->willReturn(json_decode(file_get_contents(__DIR__ . '/Conf/' . $configName . '.json')));
 
         return $mock;
     }
@@ -248,7 +261,7 @@ class CrudServiceClientUnitTests extends \Mezon\Service\Tests\ServiceClientUnitT
     {
         // setup
         $client = $this->getCrudServiceClientMock();
-        $client->method('getRequest')->willReturn(json_decode(file_get_contents(__DIR__ . '/Conf/GetFields.json'), true));
+        $client->method('sendGetRequest')->willReturn(json_decode(file_get_contents(__DIR__ . '/Conf/GetFields.json'), true));
 
         // test body
         $result = $client->getFields();
@@ -256,5 +269,18 @@ class CrudServiceClientUnitTests extends \Mezon\Service\Tests\ServiceClientUnitT
         // assertions
         $this->assertArrayHasKey('fields', $result);
         $this->assertArrayHasKey('layout', $result);
+    }
+
+    /**
+     * Testing method
+     */
+    public function testGetRequestUrlException(): void
+    {
+        // setup and assertions
+        $this->expectException(\Exception::class);
+        $client = new HackedCrudServiceClient('https://some-service');
+
+        // test body
+        $client->getRequestUriPublic('unexistingUri');
     }
 }

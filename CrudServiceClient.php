@@ -94,7 +94,7 @@ class CrudServiceClient extends \Mezon\Service\ServiceClient implements \Mezon\C
      */
     public function getById($id, $crossDomain = 0)
     {
-        return $this->getRequest($this->getRequestUrl('exact', $id) . "cross_domain=$crossDomain");
+        return $this->sendGetRequest($this->getRequestUrl('exact', $id) . "cross_domain=$crossDomain");
     }
 
     /**
@@ -112,7 +112,7 @@ class CrudServiceClient extends \Mezon\Service\ServiceClient implements \Mezon\C
             return [];
         }
 
-        return $this->getRequest($this->getRequestUrl('exactList', implode(',', $ids)) . "cross_domain=$crossDomain");
+        return $this->sendGetRequest($this->getRequestUrl('exactList', implode(',', $ids)) . "cross_domain=$crossDomain");
     }
 
     /**
@@ -126,7 +126,7 @@ class CrudServiceClient extends \Mezon\Service\ServiceClient implements \Mezon\C
     {
         $data = $this->pretransformData($data);
 
-        return $this->postRequest($this->getRequestUrl('create'), $data);
+        return $this->sendPostRequest($this->getRequestUrl('create'), $data);
     }
 
     /**
@@ -143,7 +143,7 @@ class CrudServiceClient extends \Mezon\Service\ServiceClient implements \Mezon\C
      */
     public function update(int $id, array $data, int $crossDomain = 0)
     {
-        return $this->postRequest($this->getRequestUrl('update', $id) . 'cross_domain=' . $crossDomain, $data);
+        return $this->sendPostRequest($this->getRequestUrl('update', $id) . 'cross_domain=' . $crossDomain, $data);
     }
 
     /**
@@ -156,7 +156,7 @@ class CrudServiceClient extends \Mezon\Service\ServiceClient implements \Mezon\C
      */
     public function newRecordsSince($date)
     {
-        return $this->getRequest($this->getRequestUrl('newFrom', $date));
+        return $this->sendGetRequest($this->getRequestUrl('newFrom', $date));
     }
 
     /**
@@ -167,7 +167,7 @@ class CrudServiceClient extends \Mezon\Service\ServiceClient implements \Mezon\C
      */
     public function recordsCount()
     {
-        return $this->getRequest($this->getRequestUrl('recordsCount'));
+        return $this->sendGetRequest($this->getRequestUrl('recordsCount'));
     }
 
     /**
@@ -184,7 +184,7 @@ class CrudServiceClient extends \Mezon\Service\ServiceClient implements \Mezon\C
     {
         $filter = $this->getCompiledFilter($filter, false);
 
-        return $this->getRequest($this->getRequestUrl('lastRecords', $count) . $filter);
+        return $this->sendGetRequest($this->getRequestUrl('lastRecords', $count) . $filter);
     }
 
     /**
@@ -199,7 +199,7 @@ class CrudServiceClient extends \Mezon\Service\ServiceClient implements \Mezon\C
      */
     public function delete(int $id, int $crossDomain = 0): string
     {
-        return $this->getRequest($this->getRequestUrl('delete', $id) . 'cross_domain=' . $crossDomain);
+        return $this->sendGetRequest($this->getRequestUrl('delete', $id) . 'cross_domain=' . $crossDomain);
     }
 
     /**
@@ -215,7 +215,7 @@ class CrudServiceClient extends \Mezon\Service\ServiceClient implements \Mezon\C
     {
         $filter = $this->getCompiledFilter($filter);
 
-        return $this->getRequest($this->getRequestUrl('recordsCountByField', $field) . $filter);
+        return $this->sendGetRequest($this->getRequestUrl('recordsCountByField', $field) . $filter);
     }
 
     /**
@@ -231,7 +231,7 @@ class CrudServiceClient extends \Mezon\Service\ServiceClient implements \Mezon\C
     {
         $filter = $this->getCompiledFilter($filter);
 
-        $this->postRequest($this->getRequestUrl('deleteFiltered') . 'cross_domain=' . $crossDomain . $filter, []);
+        $this->sendPostRequest($this->getRequestUrl('deleteFiltered') . 'cross_domain=' . $crossDomain . $filter, []);
     }
 
     /**
@@ -273,7 +273,7 @@ class CrudServiceClient extends \Mezon\Service\ServiceClient implements \Mezon\C
 
         $order = $this->getCompiledOrder($order);
 
-        return $this->getRequest(
+        return $this->sendGetRequest(
             $this->getRequestUrl('list') . 'from=' . $from . '&limit=' . $limit . '&cross_domain=' . $crossDomain .
             $filter . $order);
     }
@@ -356,7 +356,7 @@ class CrudServiceClient extends \Mezon\Service\ServiceClient implements \Mezon\C
      */
     public function getFields(): array
     {
-        return $this->getRequest($this->getRequestUrl('fields'));
+        return $this->sendGetRequest($this->getRequestUrl('fields'));
     }
 
     /**
