@@ -1,13 +1,16 @@
 <?php
+namespace Mezon\CrudService\Tests;
+
+use Mezon\Service\Tests\ServiceClientTests;
 
 /**
  * Class CrudServiceClientTests
  *
- * @package     CrudServiceClient
- * @subpackage  CrudServiceClientTests
- * @author      Dodonov A.A.
- * @version     v.1.0 (2019/08/17)
- * @copyright   Copyright (c) 2019, aeon.org
+ * @package CrudServiceClient
+ * @subpackage CrudServiceClientTests
+ * @author Dodonov A.A.
+ * @version v.1.0 (2019/08/17)
+ * @copyright Copyright (c) 2019, aeon.org
  */
 
 /**
@@ -16,7 +19,7 @@
  * @author Dodonov A.A.
  * @group baseTests
  */
-class CrudServiceClientTests extends \Mezon\Service\Tests\ServiceClientTests
+class CrudServiceClientTests extends ServiceClientTests
 {
 
     /**
@@ -50,7 +53,7 @@ class CrudServiceClientTests extends \Mezon\Service\Tests\ServiceClientTests
      */
     public function testInValidConnect()
     {
-        $this->expectException(Exception::class);
+        $this->expectException(\Exception::class);
 
         $this->constructClient('1234567');
     }
@@ -89,7 +92,7 @@ class CrudServiceClientTests extends \Mezon\Service\Tests\ServiceClientTests
     {
         $client = new $this->clientClassName();
 
-        $this->expectException(Exception::class);
+        $this->expectException(\Exception::class);
 
         $client->setToken('unexistingtoken');
     }
@@ -103,7 +106,7 @@ class CrudServiceClientTests extends \Mezon\Service\Tests\ServiceClientTests
 
         try {
             $client->loginAs(EXISTING_LOGIN);
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             $this->assertEquals(0, 1, 'Login was was not called properly');
         }
     }
@@ -115,7 +118,7 @@ class CrudServiceClientTests extends \Mezon\Service\Tests\ServiceClientTests
     {
         $client = $this->construct_client();
 
-        $this->expectException(Exception::class);
+        $this->expectException(\Exception::class);
 
         $client->loginAs('alexey@dodonov.none');
     }

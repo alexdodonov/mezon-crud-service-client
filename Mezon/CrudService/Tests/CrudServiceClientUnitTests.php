@@ -1,6 +1,9 @@
 <?php
 namespace Mezon\CrudService\Tests;
 
+use Mezon\CrudService\CrudServiceClient;
+use Mezon\Service\Tests\ServiceClientUnitTests;
+
 /**
  * Class CrudServiceClientUnitTests
  *
@@ -11,34 +14,13 @@ namespace Mezon\CrudService\Tests;
  * @copyright Copyright (c) 2019, aeon.org
  */
 
-class HackedCrudServiceClient extends \Mezon\CrudService\CrudServiceClient
-{
-
-    public function publicGetCompiledFilter($filter, $amp = true): string
-    {
-        return (parent::getCompiledFilter($filter, $amp));
-    }
-
-    /**
-     * Method returns concrete url byit's locator
-     *
-     * @param string $urlLocator
-     *            url locator
-     * @return string concrete URL
-     */
-    public function getRequestUriPublic(string $urlLocator): string
-    {
-        return $this->getRequestUrl($urlLocator);
-    }
-}
-
 /**
  * Common unit tests for CrudServiceClient and all derived client classes
  *
  * @author Dodonov A.A.
  * @group baseTests
  */
-class CrudServiceClientUnitTests extends \Mezon\Service\Tests\ServiceClientUnitTests
+class CrudServiceClientUnitTests extends ServiceClientUnitTests
 {
 
     /**
@@ -48,7 +30,7 @@ class CrudServiceClientUnitTests extends \Mezon\Service\Tests\ServiceClientUnitT
      */
     protected function getCrudServiceClientMock()
     {
-        $mock = $this->getMockBuilder(\Mezon\CrudService\CrudServiceClient::class)
+        $mock = $this->getMockBuilder(CrudServiceClient::class)
             ->setMethods([
             'sendGetRequest',
             'sendPostRequest'
