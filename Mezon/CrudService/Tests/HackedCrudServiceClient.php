@@ -10,15 +10,15 @@ use Mezon\CrudService\CrudServiceClient;
  * @subpackage CrudServiceClientUnitTests
  * @author Dodonov A.A.
  * @version v.1.0 (2019/09/18)
- * @copyright Copyright (c) 2019, aeon.org
+ * @copyright Copyright (c) 2019, aeon.su
  */
-
 class HackedCrudServiceClient extends CrudServiceClient
 {
 
+    // TODO replace it with Mock
     public function publicGetCompiledFilter($filter, $amp = true): string
     {
-        return (parent::getCompiledFilter($filter, $amp));
+        return parent::getCompiledFilter($filter, $amp);
     }
 
     /**

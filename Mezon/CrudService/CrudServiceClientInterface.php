@@ -8,7 +8,7 @@ namespace Mezon\CrudService;
  * @subpackage CrudServiceClientInterface
  * @author Dodonov A.A.
  * @version v.1.0 (2019/08/13)
- * @copyright Copyright (c) 2019, aeon.org
+ * @copyright Copyright (c) 2019, aeon.su
  */
 
 /**

@@ -11,7 +11,7 @@ use Mezon\Service\Tests\ServiceClientUnitTests;
  * @subpackage CrudServiceClientUnitTests
  * @author Dodonov A.A.
  * @version v.1.0 (2019/09/18)
- * @copyright Copyright (c) 2019, aeon.org
+ * @copyright Copyright (c) 2019, aeon.su
  */
 
 /**
@@ -51,8 +51,10 @@ class CrudServiceClientUnitTests extends ServiceClientUnitTests
     {
         $mock = $this->getCrudServiceClientMock();
 
-        $mock->method('sendGetRequest')->willReturn(json_decode(file_get_contents(__DIR__ . '/Conf/' . $configName . '.json')));
-        $mock->method('sendPostRequest')->willReturn(json_decode(file_get_contents(__DIR__ . '/Conf/' . $configName . '.json')));
+        $mock->method('sendGetRequest')->willReturn(
+            json_decode(file_get_contents(__DIR__ . '/Conf/' . $configName . '.json')));
+        $mock->method('sendPostRequest')->willReturn(
+            json_decode(file_get_contents(__DIR__ . '/Conf/' . $configName . '.json')));
 
         return $mock;
     }
@@ -221,16 +223,31 @@ class CrudServiceClientUnitTests extends ServiceClientUnitTests
         $client = $this->getSetupMockWithGetMethod('Create');
 
         // test body
-        $result = $client->create([
-            'field' => 1,
-            'avatar' => [
-                'name' => 'n',
-                'size' => 's',
-                'type' => 't',
-                'tmp_name' => __FILE__
-            ],
-            'invalid-file' => []
-        ]);
+        $result = $client->create(
+            [
+                'field' => 1,
+                'avatar' => [
+                    'name' => 'n',
+                    'size' => 's',
+                    'type' => 't',
+                    'tmp_name' => __FILE__
+                ],
+                'scans' => [
+                    'name' => [
+                        'n'
+                    ],
+                    'size' => [
+                        's'
+                    ],
+                    'type' => [
+                        't'
+                    ],
+                    'tmp_name' => [
+                        __FILE__
+                    ]
+                ],
+                'invalid-file' => []
+            ]);
 
         // assertions
         $this->assertEquals(1, $result->id);
@@ -243,7 +260,8 @@ class CrudServiceClientUnitTests extends ServiceClientUnitTests
     {
         // setup
         $client = $this->getCrudServiceClientMock();
-        $client->method('sendGetRequest')->willReturn(json_decode(file_get_contents(__DIR__ . '/Conf/GetFields.json'), true));
+        $client->method('sendGetRequest')->willReturn(
+            json_decode(file_get_contents(__DIR__ . '/Conf/GetFields.json'), true));
 
         // test body
         $result = $client->getFields();

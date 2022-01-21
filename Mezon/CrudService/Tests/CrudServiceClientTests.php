@@ -10,14 +10,13 @@ use Mezon\Service\Tests\ServiceClientTests;
  * @subpackage CrudServiceClientTests
  * @author Dodonov A.A.
  * @version v.1.0 (2019/08/17)
- * @copyright Copyright (c) 2019, aeon.org
+ * @copyright Copyright (c) 2019, aeon.su
  */
 
 /**
  * Common unit tests for CrudServiceClient and all derived client classes
  *
  * @author Dodonov A.A.
- * @group baseTests
  */
 class CrudServiceClientTests extends ServiceClientTests
 {

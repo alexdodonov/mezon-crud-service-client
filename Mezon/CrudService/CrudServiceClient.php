@@ -1,6 +1,9 @@
 <?php
 namespace Mezon\CrudService;
 
+use Mezon\Service\ServiceClient;
+use Mezon\Functional\Fetcher;
+
 /**
  * Class CrudServiceClient
  *
@@ -8,7 +11,7 @@ namespace Mezon\CrudService;
  * @subpackage CrudServiceClient
  * @author Dodonov A.A.
  * @version v.1.0 (2019/08/13)
- * @copyright Copyright (c) 2019, aeon.org
+ * @copyright Copyright (c) 2019, aeon.su
  */
 
 /**
@@ -16,7 +19,7 @@ namespace Mezon\CrudService;
  *
  * @author Dodonov A.A.
  */
-class CrudServiceClient extends \Mezon\Service\ServiceClient implements \Mezon\CrudService\CrudServiceClientInterface
+class CrudServiceClient extends ServiceClient implements CrudServiceClientInterface
 {
 
     /**
@@ -112,7 +115,8 @@ class CrudServiceClient extends \Mezon\Service\ServiceClient implements \Mezon\C
             return [];
         }
 
-        return $this->sendGetRequest($this->getRequestUrl('exactList', implode(',', $ids)) . "cross_domain=$crossDomain");
+        return $this->sendGetRequest(
+            $this->getRequestUrl('exactList', implode(',', $ids)) . "cross_domain=$crossDomain");
     }
 
     /**
@@ -241,9 +245,9 @@ class CrudServiceClient extends \Mezon\Service\ServiceClient implements \Mezon\C
      *            Service to be connected to
      * @param string $token
      *            Connection token
-     * @return \Mezon\CrudService\CrudServiceClient Instance of the CrudServiceClient class
+     * @return CrudServiceClient Instance of the CrudServiceClient class
      */
-    public static function instance(string $service, string $token): \Mezon\CrudService\CrudServiceClient
+    public static function instance(string $service, string $token): CrudServiceClient
     {
         $connection = new CrudServiceClient($service);
 
@@ -309,10 +313,8 @@ class CrudServiceClient extends \Mezon\Service\ServiceClient implements \Mezon\C
             return false;
         }
 
-        if (\Mezon\Functional\Functional::getField($value, 'name') !== null &&
-            \Mezon\Functional\Functional::getField($value, 'size') !== null &&
-            \Mezon\Functional\Functional::getField($value, 'type') !== null &&
-            \Mezon\Functional\Functional::getField($value, 'tmp_name') !== null) {
+        if (Fetcher::getField($value, 'name') !== null && Fetcher::getField($value, 'size') !== null &&
+            Fetcher::getField($value, 'type') !== null && Fetcher::getField($value, 'tmp_name') !== null) {
             return true;
         }
 
@@ -384,8 +386,8 @@ class CrudServiceClient extends \Mezon\Service\ServiceClient implements \Mezon\C
             'newFrom' => $rewriteMode ? '/new/from/' . $param . '/' : '?r=' . urlencode('new/from/' . $param),
             'update' => $rewriteMode ? '/update/' . $param . '/?' : '?r=' . urlencode('update/' . $param) . '&',
             'create' => $rewriteMode ? '/create/' : '?r=create',
-            'exactList' => $rewriteMode ? '/exact/list/' . $param . '/?' : '?r=' .
-            urlencode('exact/list/' . $param) . '&',
+            'exactList' => $rewriteMode ? '/exact/list/' . $param . '/?' : '?r=' . urlencode('exact/list/' . $param) .
+            '&',
             'exact' => $rewriteMode ? '/exact/' . $param . '/?' : '?r=' . urlencode('exact/' . $param) . '&'
         ];
 
